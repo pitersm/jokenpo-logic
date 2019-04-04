@@ -1,20 +1,46 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
+<div class="p-grid">
+  <div class="p-offset-2 p-col-8">
+    <p-panel header="Rock-Paper-Scissors">
+      <form #rpsForm="ngForm">
+        <div class="p-grid">
+          <div class="p-col-4">
+            Informe o número de partidas:
+            <input id="input" type="number" name="count" pInputText [(ngModel)]="inputCount" min="0">
+            &nbsp;&nbsp;<button pButton type="button" label="Alterar" class="ui-button-info" (click)="setTournamentForm()"></button>
+      </div>
+        </div>
+        <div *ngFor="let game of tournament; let i = index">
+          <hr>
+          <h3>Jogo {{ i + 1 }}</h3>
+          <!-- jogador 1 -->
+          <div class="p-grid">
+            <div class="p-col-4">
+              Nome do jogador 1:
+              <input id="input" type="text" name="j1" size="30" pInputText [(ngModel)]="game[0][0]">
+            </div>
+            <div class="p-col-4">
+              Jogada: <br>
+              <p-selectButton [options]="types" name="t1" [(ngModel)]="game[0][1]"></p-selectButton>
+            </div>
+          </div>
+          <!-- jogador 2 -->
+          <div class="p-grid">
+            <div class="p-col-4">
+              Nome do jogador 2:
+              <input id="input" type="text" name="j2" size="30" pInputText [(ngModel)]="game[1][0]">
+            </div>
+            <div class="p-col-4">
+              Jogada: <br>
+              <p-selectButton [options]="types" name="j1" [(ngModel)]="game[1][1]"></p-selectButton>
+            </div>
+          </div>
+        </div>
+      </form>
+      <p-footer>
+        <button pButton type="button" label="Realizar Jogo" class="ui-button-info" (click)="doSingleGame()" *ngIf="gameCount === 1"></button>
+        <button pButton type="button" label="Realizar Torneio" class="ui-button-info" (click)="doTournamentGame()" *ngIf="gameCount > 1"></button>
+      </p-footer>
+    </p-panel>
+  </div>
 </div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
-
+<p-toast key="msg"></p-toast>
